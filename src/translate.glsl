@@ -4,8 +4,14 @@
 mat4 translate(vec3 t)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return identity();
+  // Replace with your code
+    mat4 res = identity();
+    res[0][3] = t.x;
+    res[1][3] = t.y;
+    res[2][3] = t.z;
+    
+    return res;
+    
   /////////////////////////////////////////////////////////////////////////////
 }
 
