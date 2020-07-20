@@ -13,10 +13,12 @@ in vec4 pos_cs_in[];
 //                     positions (should be set to input using gl_InvocationID)
 out vec4 pos_es_in[];
 void main()
-{   
-  /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code:
+{
+//https://erkaman.github.io/posts/tess_opt.html
+  gl_TessLevelOuter[0] = 5;
+  gl_TessLevelOuter[1] = 5;
+  gl_TessLevelOuter[2] = 5;
+  gl_TessLevelInner[0] = 5;
   pos_es_in[gl_InvocationID] = pos_cs_in[gl_InvocationID];
-  /////////////////////////////////////////////////////////////////////////////
 }
 
