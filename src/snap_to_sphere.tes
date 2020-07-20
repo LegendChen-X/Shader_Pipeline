@@ -25,11 +25,29 @@ out vec3 sphere_fs_in;
 // expects: interpolat, model, 
 void main()
 {
-  /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  pos_fs_in = interpolate(gl_TessCoord, pos_es_in[0], pos_es_in[1], pos_es_in[2]);
+  vec4 interpolate = interpolate(gl_TessCoord, pos_es_in[0], pos_es_in[1], pos_es_in[2]);
   gl_Position = pos_fs_in;
-  /////////////////////////////////////////////////////////////////////////////
+  mat4 model_matrix = model(is_moon, animation_seconds);
+  
+  if(is_moon)
+  {
+    mat4 shrink_matrix = uniform_scale(0.3);
+    vec4 shift_vector = vec4(sin(M_PI/2 * animation_seconds)*2, 0, cos(M_PI/2 * animation_seconds)*2, 0);
+    view_pos_fs_in = model_matrix * vec4(normalize(interpolate.xyz),1) + shift_vector;
+    pos_fs_in = model_matrix * shrink_matrix * vec4(normalize(interpolate.xyz),1) + shift_vector;
+  }
+  
+  else
+  {
+    view_pos_fs_in = model_matrix * vec4(normalize(interpolate.xyz),1);
+    pos_fs_in = model_matrix * vec4(normalize(interpolate.xyz),1);
+  }
+  
+  pos_fs_in = proj * view * pos_fs_in;
+  view_pos_fs_in = view * view_pos_fs_in;
+  normal_fs_in = (transpose(inverse(view)) * transpose(inverse(model_matrix)) * vec4(normalize(interpolate.xyz),1)).xyz;
+  sphere_fs_in = vec4(normalize(interpolate.xyz),1).xyz;
+  gl_Position = pos_fs_in;
 }
 
 
