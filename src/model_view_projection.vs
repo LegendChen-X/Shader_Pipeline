@@ -25,6 +25,14 @@ void main()
 {
   /////////////////////////////////////////////////////////////////////////////
   // Replace with your code 
-  pos_cs_in = vec4(pos_vs_in,1.0);
+    mat4 model = model(is_moon,animation_seconds);
+    pos_cs_in = proj * view * model;
+    if(is_moon)
+    {
+        mat4 shift_matrix = translate(vec3(2, 0, 0));
+        mat4 shrink_matrix = uniform_scale(0.3);
+        pos_cs_in = pos_cs_in * shift_matrix * shrink_matrix;
+    }
+    pos_cs_in = pos_cs_in * vec4(pos_vs_in, 1);
   /////////////////////////////////////////////////////////////////////////////
 }
