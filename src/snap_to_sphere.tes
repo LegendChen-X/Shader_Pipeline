@@ -26,7 +26,6 @@ out vec3 sphere_fs_in;
 void main()
 {
   vec4 interpolate = interpolate(gl_TessCoord, pos_es_in[0], pos_es_in[1], pos_es_in[2]);
-  gl_Position = pos_fs_in;
   mat4 model_matrix = model(is_moon, animation_seconds);
   
   if(is_moon)
