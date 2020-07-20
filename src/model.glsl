@@ -10,7 +10,9 @@
 mat4 model(bool is_moon, float time)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return identity();
+  // Replace with your code
+    if(is_moon) return rotate_about_y(M_PI/2 * time);
+    
+    return identity();
   /////////////////////////////////////////////////////////////////////////////
 }
