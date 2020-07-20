@@ -21,10 +21,10 @@ vec3 blinn_phong(
   vec3 l)
 {
     vec3 res;
-    vec3 l = vec3(1,1,1);
-    vec3 ambi = ka * l;
-    vec3 diff = kd * l * max(0,dot(n,l));
-    vec3 spec = ks * l * pow(max(0,dot(n,normalize(v + l)),p));
+    vec3 light = vec3(1,1,1);
+    vec3 ambi = ka * light;
+    vec3 diff = kd * light * max(0,dot(n,l));
+    vec3 spec = ks * light * pow(max(0,dot(n,normalize(v + l))),p);
     res = ambi + diff + spec;
     return res;
 }
