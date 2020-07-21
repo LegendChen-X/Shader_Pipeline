@@ -16,13 +16,9 @@ out vec3 color;
 // expects: PI, blinn_phong
 void main()
 {
-    vec3 ka;
-    vec3 kd;
-    vec3 ks;
-    
     float p = 1000;
     
-    vec4 position = vec4(cos(M_PI/4 * animation_seconds)*5, 2, sin(M_PI/4 * animation_seconds)*5, 1);
+    vec4 position = vec4(cos(M_PI/2 * animation_seconds)*4, 2, sin(M_PI/2 * animation_seconds)*4, 1);
     
     vec4 light = view * position;
     
@@ -34,6 +30,4 @@ void main()
         color = blinn_phong(vec3(0.05,0.05,0.05), vec3(0.5,0.5,0.5), vec3(0.8,0.8,0.8),p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
     else
         color = blinn_phong(vec3(0.05,0.05,0.05), vec3(0.1,0.1,0.9), vec3(0.8,0.8,0.8),p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
-    
-    color = blinn_phong(ka,kd,ks,p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
 }
