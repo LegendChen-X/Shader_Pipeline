@@ -31,17 +31,9 @@ void main()
     vec3 v_ray = view_pos_fs_in.xyz / view_pos_fs_in.w;
     
     if(is_moon)
-    {
-        ka = vec3(0.03,0.03,0.03);
-        kd = vec3(0.27,0.27,0.27);
-        ks = vec3(0.88,0.88,0.88);
-    }
+        color = blinn_phong(vec3(0.05,0.05,0.05), vec3(0.5,0.5,0.5), vec3(0.8,0.8,0.8),p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
     else
-    {
-        ka = vec3(0.03,0.03,0.03);
-        kd = vec3(0.18,0.32,0.69);
-        ks = vec3(0.88,0.88,0.88);
-    }
+        color = blinn_phong(vec3(0.05,0.05,0.05), vec3(0.1,0.1,0.9), vec3(0.8,0.8,0.8),p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
     
     color = blinn_phong(ka,kd,ks,p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
 }
