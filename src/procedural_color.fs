@@ -17,8 +17,41 @@ out vec3 color;
 // expects: blinn_phong, perlin_noise
 void main()
 {
-  /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  color = vec3(1,1,1);
-  /////////////////////////////////////////////////////////////////////////////
+    vec3 ka;
+    vec3 kd;
+    vec3 ks;
+       
+    float p = 1000;
+       
+    vec4 position = vec4(cos(M_PI/2 * animation_seconds)*5, 3, sin(M_PI/2 * animation_seconds)*5, 1);
+       
+    vec4 light = view * position;
+    vec3 l_ray = light.xyz / light.w;
+    vec3 v_ray = view_pos_fs_in.xyz / view_pos_fs_in.w;
+    
+    vec3 n = normalize(normal_fs_in);
+    vec3 v = normalize(-v_ray);
+    vec3 l = normalize(l_ray-v_ray);
+    
+    float earth_noise = abs(perlin_noise(sphere_fs_in)*M_PI);
+    float moon_noise = abs(perlin_noise(sphere_fs_in)*6*M_PI);
+    
+    if(is_moon)
+    {
+        ka = vec3(0.03,0.03,0.03);
+        kd = vec3(0.27,0.27,0.27) * moon_noise;
+        ks = vec3(0.88,0.88,0.88);
+    }
+    else
+    {
+        ka = vec3(0.03,0.03,0.03);
+        kd = vec3(0.18,0.32,0.69) * earth_noise;
+        ks = vec3(0.88,0.88,0.88);
+    }
+    
+    color = blinn_phong(ka, kd, ks, p, n, v, l);
+    
+    
+    
+    
 }
