@@ -8,8 +8,9 @@
 // expects: random2.glsl, PI.glsl
 vec3 random_direction( vec3 seed)
 {
-  /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code 
-  return vec3(1,0,0);
-  /////////////////////////////////////////////////////////////////////////////
+    vec2 factor =  random2(seed);
+    float theta = 2 * M_PI * factor.x;
+    float phi = M_PI * factor.y;
+    
+    return normalize(vec3(cos(theta)*sin(phi),sin(theta)*sin(phi),cos(phi)));
 }
