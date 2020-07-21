@@ -22,7 +22,7 @@ void main()
     
     float p = 1000;
     
-    vec4 position = vec4(cos(M_PI/2 * animation_seconds)*5, 2, sin(M_PI/2 * animation_seconds)*5, 1);
+    vec4 position = vec4(cos(M_PI/4 * animation_seconds)*5, 2, sin(M_PI/4 * animation_seconds)*5, 1);
     
     vec4 light = view * position;
     
@@ -32,17 +32,16 @@ void main()
     
     if(is_moon)
     {
-        ka = vec3(0.05,0.05,0.05);
-        kd = vec3(0.5,0.5,0.5);
-        ks = vec3(0.5,0.5,0.5);
+        ka = vec3(0.03,0.03,0.03);
+        kd = vec3(0.27,0.27,0.27);
+        ks = vec3(0.88,0.88,0.88);
     }
     else
     {
-        ka = vec3(0.08,0.08,0.08);
-        kd = vec3(0.8,0.8,0.8);
-        ks = vec3(0.8,0.8,0.8);
+        ka = vec3(0.03,0.03,0.03);
+        kd = vec3(0.18,0.32,0.69);
+        ks = vec3(0.88,0.88,0.88);
     }
     
     color = blinn_phong(ka,kd,ks,p,normalize(normal_fs_in),normalize(-v_ray),normalize(l_ray-v_ray));
- 
 }

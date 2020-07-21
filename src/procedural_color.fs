@@ -23,7 +23,7 @@ void main()
        
     float p = 1000;
        
-    vec4 position = vec4(cos(M_PI/2 * animation_seconds)*5, 3, sin(M_PI/2 * animation_seconds)*5, 1);
+    vec4 position = vec4(cos(M_PI/4 * animation_seconds)*5, 3, sin(M_PI/4 * animation_seconds)*5, 1);
        
     vec4 light = view * position;
     vec3 l_ray = light.xyz / light.w;
@@ -50,8 +50,4 @@ void main()
     }
     
     color = blinn_phong(ka, kd, ks, p, n, v, l);
-    
-    
-    
-    
 }
